@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Question {
 
-    // cityName, cityArray, fileName as fields
+    // cityName, underscores, cityList, wrongLetters, count as fields
     private String cityName;
     private String underscores = "";
     private List<String> cityList = new ArrayList<String>();
@@ -25,6 +25,7 @@ public class Question {
         wrongLetters = "";
         counts = 0;
     }
+
     /**
      * check if check if input is contained in city name
      * @return  true if contains, otherwise false
@@ -40,7 +41,7 @@ public class Question {
     }
 
     /**
-     *
+     * fill the word int he underscores
      * @param inputChar
      * @return underscores
      */
@@ -50,13 +51,13 @@ public class Question {
         // switch the underscores to the letter
         result = cityName.indexOf(inputChar);
         for (int i = 0; i < cityName.length(); i++) {
+            if (result == -1) {
+                break;
+            }
             sb.setCharAt(result*2, inputChar);
             // StringBuilder to String
             underscores = sb.toString();
             result = cityName.indexOf(inputChar, result +1);
-            if (result == -1) {
-                break;
-            }
         }
         return underscores;
     }
@@ -72,7 +73,7 @@ public class Question {
     }
 
     /**
-     * set city
+     * set city name
      */
     public void setCityName() {
         try {
@@ -98,7 +99,7 @@ public class Question {
     }
 
     // underscores "_" in place of the real letters
-    public String getUnderscores() {
+    public String replaceUnderscores() {
         // change city name to underscores
         for (int j = 0; j < getCityName().length(); j++){
             if (cityName.charAt(j) == Properties.SPACE){
@@ -114,8 +115,6 @@ public class Question {
     public String getCityName() {
         return cityName;
     }
-
-
 
     public int getCounts() {
         return counts;
